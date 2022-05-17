@@ -1,0 +1,35 @@
+type Assign @entity {
+  id: ID!
+  punk: Punk!
+  user: User!
+  timeStamp: BigInt!
+}
+
+type Punk @entity {
+  id: ID!
+  birthTime: BigInt!
+  dad: User!
+  owner: User!
+}
+
+type User @entity {
+  id: ID!
+  ownerPunks: [Punk!]! @derivedFrom(field: "owner")
+  madePunks: [Punk!]! @derivedFrom(field: "dad")
+}
+
+type PunkBought @entity {
+  id: ID!
+  punk: Punk!
+  buyer: User!
+  seller: User!
+  amount: BigInt!
+  timeStamp: BigInt!
+}
+
+type PunkTransfer @entity {
+  id: ID!
+  from: User!
+  to: User!
+  punk: Punk!
+}
